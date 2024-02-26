@@ -7,11 +7,13 @@ from models import storage
 
 @app_views.route('/status')
 def get_status():
+    """get status"""
     return jsonify({'status': 'OK'})
 
 
 @app_views.route('/stats')
 def get_count():
+    """get count"""
     dict = {"amenities": 'Amenity',
                   "cities": 'City',
                   "places": 'Place',
