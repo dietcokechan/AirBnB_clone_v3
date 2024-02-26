@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
-import sqlalchemy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, DateTime
 import uuid
 from datetime import datetime
+from os import getenv
 
 Base = declarative_base()
 
@@ -59,6 +59,8 @@ class BaseModel:
                 "%Y-%m-%dT%H:%M:%S.%f")
         if '_sa_instance_state' in cpydict:
             del cpydict['_sa_instance_state']
+        if getenv("HBNB_TYPE_STORAGE") == "db" and hasattr(self, "password"):
+            del cpydict["password"]
         return cpydict
 
     def delete(self):
